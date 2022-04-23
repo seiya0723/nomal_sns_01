@@ -1,0 +1,36 @@
+{% extends "bbs/base.html" %}
+{% load static %}
+
+
+{% block extra_head %}
+{% endblock %}
+
+
+{% block main %}
+<a class="btn btn-outline-danger" href="{% url 'bbs:index' %}">戻る</a>
+
+<div class="border">
+    <div>{{ topic.category.name }}</div>
+    <div>{{ topic.user.username }}</div>
+    <div>{{ topic.comment }}</div>
+</div>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <textarea class="form-control" name="comment" placeholder="コメント"></textarea>
+    <input class="form-control" type="submit" value="リプライ">
+</form>
+
+{% for reply in replies %}
+<div class="border">
+    <div>{{ reply.user.username }}</div>
+    <div>{{ reply.comment }}</div>
+</div>
+{% endfor %}
+
+
+{% endblock %}
+
+
+
+
